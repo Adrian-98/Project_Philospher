@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.h                                      :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/21 18:27:58 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/10/21 19:42:27 by amunoz-p         ###   ########.fr       */
+/*   Created: 2020/10/21 19:42:42 by amunoz-p          #+#    #+#             */
+/*   Updated: 2020/10/21 19:43:12 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHER_H
-#define PHILOSOPHER_H
+int		ft_strlen(char *str)
+{
+	int	i;
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include <sys/time.h>
-# include <stdio.h>
-
-int			ft_strlen(char *str);
-
-
-#endif
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
