@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:26:47 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/10/21 19:36:47 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/10/21 20:32:11 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int			main(int argc, char **agv)
 {
 	if (argc < 5 || argc > 6)
 		return(ft_error("ERROR :Bad arguments \n"));
+	
 	return (0);
 }
