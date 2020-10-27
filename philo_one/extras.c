@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   extras.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 19:42:42 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/10/21 20:33:56 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/10/22 18:09:26 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philosopher.h"
 
 int		ft_strlen(char *str)
 {
@@ -68,4 +70,11 @@ uint64_t	get_time(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * (uint64_t)1000) + (tv.tv_usec / 1000));
+}
+
+int			ft_error(char *str)
+{
+	if (str)
+		write(1, str, ft_strlen(str));
+	return (1);
 }

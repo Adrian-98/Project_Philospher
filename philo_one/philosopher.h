@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:27:58 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/10/21 20:29:42 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/10/22 18:30:03 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ typedef struct s_philo
 	int				lfork;
 	int				rfork;
 	int				eat_count;
-	t_stat			*state;
+	t_state			*state;
 	pthread_mutex_t	mutex;
 	pthread_mutex_t	eat_m;
 }				t_philo;
-typedef struct s_stat
+typedef struct s_state
 {
 	int				amount;
 	uint64_t		time_to_die;
@@ -42,15 +42,19 @@ typedef struct s_stat
 
 	uint64_t		start;
 
-	t_philo			*philos;
+	t_philo			*philo;
 	pthread_mutex_t	*forks_m;
 	pthread_mutex_t	write_m;
 	pthread_mutex_t	somebody_dead_m;
 
-}				t_stat;
+}				t_state;
 
 
-int			ft_strlen(char *str);
+int					ft_strlen(char *str);
+int					ft_atoi(char const *str);
+void				ft_putnbr_fd(uint64_t n, int fd);
+uint64_t			get_time(void);
+int					init_mutex(t_state *state);
 
 
 #endif
