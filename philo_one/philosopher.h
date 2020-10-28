@@ -6,18 +6,19 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:27:58 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/10/22 18:30:03 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/10/28 19:04:02 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHER_H
 #define PHILOSOPHER_H
 
+# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 # include <pthread.h>
 # include <sys/time.h>
-# include <stdio.h>
 
 typedef struct s_philo
 {
@@ -28,7 +29,7 @@ typedef struct s_philo
 	int				lfork;
 	int				rfork;
 	int				eat_count;
-	t_state			*state;
+	struct s_state	*state;
 	pthread_mutex_t	mutex;
 	pthread_mutex_t	eat_m;
 }				t_philo;
@@ -55,6 +56,11 @@ int					ft_atoi(char const *str);
 void				ft_putnbr_fd(uint64_t n, int fd);
 uint64_t			get_time(void);
 int					init_mutex(t_state *state);
-
+int					start_threads(t_state *state);
+void				ft_body(t_philo *philo);
+void				ft_sleep(t_philo *philo);
+int	 				ft_error(char *str);
+void				init_philos(t_state *state);
+int					fill_struct(t_state *state, int argc, char **argv);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:26:47 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/10/27 18:41:15 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/10/28 19:49:07 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		init_mutex(t_state *state)
 	return (0);
 }
 
-static void init_philos(t_state *state)
+void		init_philos(t_state *state)
 {
 	int i;
 
@@ -65,11 +65,11 @@ int			fill_struct(t_state *state, int argc, char **argv)
 		return (0);	
 	if (!(state->philo = malloc(sizeof(t_philo) * state->amount)))
 		return (0);
-	innit_philos(state);
+	init_philos(state);
 	return (1);
 }
 
-static	int		start_threads(t_state *state)
+int		start_threads(t_state *state)
 {
 	int i;
 	pthread_t	id[state->amount];
@@ -78,7 +78,9 @@ static	int		start_threads(t_state *state)
 	i = 0;
 	while (i < state->amount)
 	{
-		pthread_creat(&id[i], )
+		pthread_create(&id[i], NULL, (void *)ft_body, &state->philo[i]);
+		i++;
+		usleep(100);
 	}
 }
 
