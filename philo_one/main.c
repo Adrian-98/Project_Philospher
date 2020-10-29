@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:26:47 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/10/28 19:49:07 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/10/29 17:49:47 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int		init_mutex(t_state *state)
 		return (1);
 	i = 0;
 	while (i < state->amount)
-		pthread_mutex_init(&state->forks_m[i++], NULL);
+	{
+		pthread_mutex_init(&state->forks_m[i], NULL);
+		i++;
+	}
 	return (0);
 }
 
@@ -52,6 +55,7 @@ int			fill_struct(t_state *state, int argc, char **argv)
 	t_philo *philo;
 	
 	state->amount = ft_atoi(argv[1]);
+	printf("numero de filosofos = %d\n", state->amount);
 	state->time_to_die = ft_atoi(argv[2]);
 	state->time_to_eat = ft_atoi(argv[3]);
 	state->time_to_sleep = ft_atoi(argv[4]);
@@ -63,8 +67,8 @@ int			fill_struct(t_state *state, int argc, char **argv)
 		|| state->time_to_eat < 60 || state->time_to_sleep < 60
 		|| state->must_eat_count < 0)
 		return (0);	
-	if (!(state->philo = malloc(sizeof(t_philo) * state->amount)))
-		return (0);
+	if (!(state->philo = malloc(sizeof(*(state->philo)) * state->amount)))
+        return (1);
 	init_philos(state);
 	return (1);
 }
@@ -73,26 +77,30 @@ int		start_threads(t_state *state)
 {
 	int i;
 	pthread_t	id[state->amount];
-	
 	state->start = get_time();
 	i = 0;
 	while (i < state->amount)
 	{
+		printf("i = %i\n", i);
 		pthread_create(&id[i], NULL, (void *)ft_body, &state->philo[i]);
-		i++;
+		pthread_detach(id[i]);
 		usleep(100);
+		i++;
 	}
+	return 0;
 }
 
 int			main(int argc, char **argv)
 {
-	t_state	state;
+	t_state	*state;
 
+	if (!(state = malloc(sizeof(t_state))))
+		return(ft_error("Error: malloc failed"));
 	if (argc < 5 || argc > 6)
 		return(ft_error("ERROR :wrong number of arguments \n"));
-	if (fill_struct(&state, argc, argv) == 0)
+	if (fill_struct(state, argc, argv) == 0)
 			return(ft_error("Error : wrong parameters or malloc fail\n"));
-	init_mutex(&state);
-	start_threads(&state);
+	init_mutex(state);
+	start_threads(state);
 	return (0);
 }
