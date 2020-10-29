@@ -6,35 +6,20 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:26:47 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/10/29 17:49:47 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/10/29 19:26:57 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int		init_mutex(t_state *state)
-{
-	int i = 0;
-	
-	pthread_mutex_init(&state->write_m, NULL);
-	pthread_mutex_init(&state->somebody_dead_m, NULL);
-	pthread_mutex_lock(&state->somebody_dead_m);
-	if (!(state->forks_m =
-		(pthread_mutex_t*)malloc(sizeof(*(state->forks_m)) * state->amount)))
-		return (1);
-	i = 0;
-	while (i < state->amount)
-	{
-		pthread_mutex_init(&state->forks_m[i], NULL);
-		i++;
-	}
-	return (0);
-}
-
 void		init_philos(t_state *state)
 {
 	int i;
 
+	if (!(state->philo =(t_philo*)malloc(sizeof(*(state->philo)) * state->amount)))
+        return ;
+	if (!(state->forks_m = (pthread_mutex_t*)
+		malloc(sizeof(*(state->forks_m)) * state->amount)))
 	i = 0;
 	while (i < state->amount)
 	{
@@ -43,9 +28,11 @@ void		init_philos(t_state *state)
 		state->philo[i].lfork = i;
 		state->philo[i].rfork = (i + 1) % state->amount;
 		state->philo[i].eat_count = 0;
-		pthread_mutex_init(&state->philo[i].mutex, NULL);
-		pthread_mutex_init(&state->philo[i].eat_m, NULL);
-		pthread_mutex_lock(&state->philo[i].eat_m);
+		state->philo[i].state = state;
+		state->philo[i].forks_m = state->forks_m;
+		// pthread_mutex_init(&state->philo[i].mutex, NULL);
+		// pthread_mutex_init(&state->philo[i].eat_m, NULL);
+		// pthread_mutex_lock(&state->philo[i].eat_m);
 		i++;
 	}
 }
@@ -66,27 +53,33 @@ int			fill_struct(t_state *state, int argc, char **argv)
 	if (state->amount < 2 || state->amount > 200 || state->time_to_die < 60
 		|| state->time_to_eat < 60 || state->time_to_sleep < 60
 		|| state->must_eat_count < 0)
-		return (0);	
-	if (!(state->philo = malloc(sizeof(*(state->philo)) * state->amount)))
-        return (1);
-	init_philos(state);
+		return (0);
+	state->forks_m = NULL;
+	state->philo = NULL;
 	return (1);
 }
 
 int		start_threads(t_state *state)
 {
-	int i;
 	pthread_t	id[state->amount];
-	state->start = get_time();
+	int i;
+
+	init_philos(state);
 	i = 0;
 	while (i < state->amount)
+		pthread_mutex_init(&state->forks_m[i++], NULL);
+	i = -1;
+	while (++i < state->amount)
 	{
-		printf("i = %i\n", i);
-		pthread_create(&id[i], NULL, (void *)ft_body, &state->philo[i]);
-		pthread_detach(id[i]);
+		state->philo[i].last_eat = get_time();
+		if(pthread_create(&id[i], NULL, (void *)&ft_body, &state->philo[i]) != 0)
+			return (ft_error("Error: creating threads\n"));
 		usleep(100);
-		i++;
 	}
+	i = 0;
+	while (i < state->amount)
+		pthread_join(id[i++], NULL);
+	pthread_join(id[1], NULL);
 	return 0;
 }
 
@@ -95,12 +88,11 @@ int			main(int argc, char **argv)
 	t_state	*state;
 
 	if (!(state = malloc(sizeof(t_state))))
-		return(ft_error("Error: malloc failed"));
+		return(ft_error("Error: malloc failed\n"));
 	if (argc < 5 || argc > 6)
 		return(ft_error("ERROR :wrong number of arguments \n"));
 	if (fill_struct(state, argc, argv) == 0)
 			return(ft_error("Error : wrong parameters or malloc fail\n"));
-	init_mutex(state);
 	start_threads(state);
 	return (0);
 }
