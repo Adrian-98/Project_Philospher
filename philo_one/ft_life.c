@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:33:41 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/02 16:53:37 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/02 17:34:32 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int		ft_counter(t_state *state)
 		amount++;
 	}
 	ft_error("HAN COMIDO");
+	pthread_mutex_unlock(&state->somebody_dead_m);
 	return (0);
 }

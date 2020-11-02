@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:26:47 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/02 16:45:39 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/02 17:34:11 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int			fill_struct(t_state *state, int argc, char **argv)
 {
 	t_philo *philo;
 	
+	pthread_mutex_init(&state->somebody_dead_m, NULL);
+	pthread_mutex_lock(&state->somebody_dead_m);
 	state->amount = ft_atoi(argv[1]);
-	printf("numero de filosofos = %d\n", state->amount);
 	state->time_to_die = ft_atoi(argv[2]);
 	state->time_to_eat = ft_atoi(argv[3]);
 	state->time_to_sleep = ft_atoi(argv[4]);
@@ -78,9 +79,6 @@ int		start_threads(t_state *state)
 		usleep(100);
 	}
 	i = 0;
-	while (i < state->amount)
-		pthread_join(id[i++], NULL);
-	pthread_join(id[1], NULL);
 	return 0;
 }
 
@@ -95,5 +93,6 @@ int			main(int argc, char **argv)
 	if (fill_struct(state, argc, argv) == 0)
 			return(ft_error("Error : wrong parameters or malloc fail\n"));
 	start_threads(state);
+	pthread_mutex_lock(&state->somebody_dead_m);
 	return (0);
 }
