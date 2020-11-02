@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:26:47 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/10/29 19:26:57 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/02 16:45:39 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void		init_philos(t_state *state)
 		state->philo[i].state = state;
 		state->philo[i].forks_m = state->forks_m;
 		// pthread_mutex_init(&state->philo[i].mutex, NULL);
-		// pthread_mutex_init(&state->philo[i].eat_m, NULL);
-		// pthread_mutex_lock(&state->philo[i].eat_m);
+		pthread_mutex_init(&state->philo[i].eat_m, NULL);
+		pthread_mutex_lock(&state->philo[i].eat_m);
 		i++;
 	}
 }
@@ -68,6 +68,7 @@ int		start_threads(t_state *state)
 	i = 0;
 	while (i < state->amount)
 		pthread_mutex_init(&state->forks_m[i++], NULL);
+	ft_eat_counter(state);
 	i = -1;
 	while (++i < state->amount)
 	{

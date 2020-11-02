@@ -6,13 +6,13 @@
 #    By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 19:37:10 by amunoz-p          #+#    #+#              #
-#    Updated: 2020/10/28 19:48:13 by amunoz-p         ###   ########.fr        #
+#    Updated: 2020/11/02 16:33:38 by amunoz-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= philo_one
 
-SRCS		= main.c extras.c ft_body.c
+SRCS		= main.c extras.c ft_body.c ft_life.c
 
 OBJS		=	$(SRCS:.c=.o)
 

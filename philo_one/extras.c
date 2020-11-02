@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 19:42:42 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/10/22 18:09:26 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/02 16:55:22 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ int			ft_error(char *str)
 {
 	if (str)
 		write(1, str, ft_strlen(str));
+	exit (0);
 	return (1);
 }
