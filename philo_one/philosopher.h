@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:27:58 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/02 16:37:36 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/02 19:13:55 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,8 @@ int					fill_struct(t_state *state, int argc, char **argv);
 void				ft_drop_fork(t_philo *philo);
 void				ft_eat_counter(t_state *state);
 int					ft_counter(t_state *state);
+void				ft_eat(t_philo *philo);
+void				ft_take_fork(t_philo *philo);
+void				ft_monitor(t_philo *philo);
 
 #endif
