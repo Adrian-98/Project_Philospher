@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:26:47 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/02 20:04:43 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/02 20:42:58 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,11 @@ int		start_threads(t_state *state)
 	i = 0;
 	while (i < state->amount)
 		pthread_mutex_init(&state->forks_m[i++], NULL);
-	ft_eat_counter(state);
+		
+	if (state->must_eat_count > 0)
+	{
+		ft_eat_counter(state);	
+	}
 	i = -1;
 	while (++i < state->amount)
 	{
