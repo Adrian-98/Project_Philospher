@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:26:47 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/02 18:04:05 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/02 20:04:43 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		init_philos(t_state *state)
 	if (!(state->forks_m = (pthread_mutex_t*)
 		malloc(sizeof(*(state->forks_m)) * state->amount)))
 	i = 0;
+	pthread_mutex_init(&state->write_m, NULL);
 	while (i < state->amount)
 	{
 		state->philo[i].position = i;

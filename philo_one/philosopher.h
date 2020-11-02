@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:27:58 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/02 19:13:55 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/02 20:02:37 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+# define EAT 	0
+# define SLEEP 	1
+# define FORK 	2
+# define THINK	3
+# define DIED 	4
+# define OVER 	5
 typedef struct s_philo
 {
 	int				position;
@@ -69,5 +75,6 @@ int					ft_counter(t_state *state);
 void				ft_eat(t_philo *philo);
 void				ft_take_fork(t_philo *philo);
 void				ft_monitor(t_philo *philo);
+void				message(t_philo *philo, int type);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:33:41 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/02 19:19:27 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/02 19:58:07 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		ft_counter(t_state *state)
 			pthread_mutex_lock(&state->philo[i++].eat_m);
 		amount++;
 	}
-	ft_error("HAN COMIDO");
+	message(&state->philo[0], OVER);
 	pthread_mutex_unlock(&state->somebody_dead_m);
 	return (0);
 }
@@ -48,7 +48,7 @@ void		ft_monitor(t_philo *philo)
 		pthread_mutex_lock(&philo->mutex);
 		if (!philo->is_eating && get_time() > philo->limit)
 		{
-			printf("filosofo %i ha muerto\n", philo->position);
+			message(philo, DIED);
 			pthread_mutex_unlock(&philo->mutex);
 			pthread_mutex_unlock(&philo->state->somebody_dead_m);
 			return ;
