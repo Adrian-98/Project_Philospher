@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:26:47 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/02 20:42:58 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/03 10:36:41 by adrian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int			fill_struct(t_state *state, int argc, char **argv)
 		|| state->time_to_eat < 60 || state->time_to_sleep < 60
 		|| state->must_eat_count < 0)
 		return (0);
-	state->forks_m = NULL;
-	state->philo = NULL;
+	// state->forks_m = NULL;
+	// state->philo = NULL;
 	return (1);
 }
 
@@ -71,11 +71,8 @@ int		start_threads(t_state *state)
 	i = 0;
 	while (i < state->amount)
 		pthread_mutex_init(&state->forks_m[i++], NULL);
-		
 	if (state->must_eat_count > 0)
-	{
-		ft_eat_counter(state);	
-	}
+		ft_eat_counter(state);
 	i = -1;
 	while (++i < state->amount)
 	{

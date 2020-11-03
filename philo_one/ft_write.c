@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_write.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:51:04 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/02 20:47:52 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/03 10:35:47 by adrian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*get_message(int type)
 	else if (type == SLEEP)
 		return (" is sleeping\n");
 	else if (type == FORK)
-		return (" has taken the left fork\n");
+		return (" has taken the forks\n");
 	else if (type == THINK)
 		return (" is thinking\n");
 	else if (type == OVER)

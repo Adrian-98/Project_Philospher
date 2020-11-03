@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_life.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:33:41 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/02 20:47:58 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/03 10:54:59 by adrian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,18 @@ int		ft_counter(t_state *state)
 	int		amount;
 	int		i;
 
-	i = 0;
+	i = -1;
 	amount = 0;
 	while (amount < state->must_eat_count)
 	{
-		while (i < state->amount)
-			pthread_mutex_lock(&state->philo[i++].eat_m);
+		printf("\n-----------------%i-----------------------------------------------------------\n", state->amount);
+		while (++i < state->amount)
+		{
+			pthread_mutex_lock(&state->philo[i].eat_m);
+		}
 		amount++;
 	}
+	printf("\nHOLAAAAAAAAAAAAAAAAAAAAA\n");
 	message(&state->philo[0], OVER);
 	pthread_mutex_unlock(&state->somebody_dead_m);
 	return (0);
