@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_body.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:41:17 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/03 10:49:45 by adrian           ###   ########.fr       */
+/*   Updated: 2020/11/03 18:02:01 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		ft_eat(t_philo *philo)
 	philo->eat_count++;
 	philo->is_eating = 0;
 	pthread_mutex_unlock(&philo->mutex);
-	pthread_mutex_unlock(&philo->eat_m);
+	philo->state->eat_m += 1;
 }
 
 void		ft_take_fork(t_philo *philo)
@@ -62,4 +62,5 @@ void		*ft_body(void *philo_v)
 		ft_drop_fork(philo);
 		ft_sleep(philo);
 	}
+	return ((void*)0);
 }

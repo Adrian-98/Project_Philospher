@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_write.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:51:04 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/03 10:35:47 by adrian           ###   ########.fr       */
+/*   Updated: 2020/11/03 18:07:51 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 static char	*get_message(int type)
 {
 	if (type == EAT)
-		return (" is eating\n");
+		return (" is EATING\n");
 	else if (type == SLEEP)
-		return (" is sleeping\n");
+		return (" is SLEEPING\n");
 	else if (type == FORK)
-		return (" has taken the forks\n");
+		return (" has taken the FORKS\n");
 	else if (type == THINK)
-		return (" is thinking\n");
+		return (" is THINKING\n");
 	else if (type == OVER)
-		return ("must eat count reached\n");
-	return (" died\n");
+		return ("PHILOSOPHERS HAVE SURVIVED!!\n");
+	return (" IS DEAD\n");
 }
 
 void	message(t_philo *philo, int type)

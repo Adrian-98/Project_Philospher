@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:26:47 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/03 10:36:41 by adrian           ###   ########.fr       */
+/*   Updated: 2020/11/03 18:02:16 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void		init_philos(t_state *state)
 		malloc(sizeof(*(state->forks_m)) * state->amount)))
 	i = 0;
 	pthread_mutex_init(&state->write_m, NULL);
+	state->eat_m = 0;
 	while (i < state->amount)
 	{
 		state->philo[i].position = i;
@@ -32,8 +33,6 @@ void		init_philos(t_state *state)
 		state->philo[i].state = state;
 		state->philo[i].forks_m = state->forks_m;
 		pthread_mutex_init(&state->philo[i].mutex, NULL);
-		pthread_mutex_init(&state->philo[i].eat_m, NULL);
-		pthread_mutex_lock(&state->philo[i].eat_m);
 		i++;
 	}
 }
@@ -56,8 +55,6 @@ int			fill_struct(t_state *state, int argc, char **argv)
 		|| state->time_to_eat < 60 || state->time_to_sleep < 60
 		|| state->must_eat_count < 0)
 		return (0);
-	// state->forks_m = NULL;
-	// state->philo = NULL;
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 18:27:58 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/02 20:02:37 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:01:30 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_philo
 	struct s_state	*state;
 	pthread_mutex_t	mutex;
 	pthread_mutex_t	*forks_m;
-	pthread_mutex_t	eat_m;
 }				t_philo;
 typedef struct s_state
 {
@@ -47,6 +46,7 @@ typedef struct s_state
 	uint64_t		time_to_eat;
 	uint64_t		time_to_sleep;
 	int				must_eat_count;
+	int				eat_m;
 
 	uint64_t		start;
 

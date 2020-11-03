@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_life.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:33:41 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/03 10:54:59 by adrian           ###   ########.fr       */
+/*   Updated: 2020/11/03 18:06:22 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,14 @@
 
 int		ft_counter(t_state *state)
 {
-	int		amount;
-	int		i;
-
-	i = -1;
-	amount = 0;
-	while (amount < state->must_eat_count)
+	while (1)
 	{
-		printf("\n-----------------%i-----------------------------------------------------------\n", state->amount);
-		while (++i < state->amount)
+		if (state->eat_m >= state->amount * state->must_eat_count)
 		{
-			pthread_mutex_lock(&state->philo[i].eat_m);
+			message(state->philo, OVER);
+			pthread_mutex_unlock(&state->somebody_dead_m);
 		}
-		amount++;
 	}
-	printf("\nHOLAAAAAAAAAAAAAAAAAAAAA\n");
-	message(&state->philo[0], OVER);
-	pthread_mutex_unlock(&state->somebody_dead_m);
-	return (0);
 }
 
 void		ft_eat_counter(t_state *state)
@@ -45,7 +35,7 @@ void		ft_eat_counter(t_state *state)
 	}
 }
 
-void		ft_monitor(t_philo *philo)
+void		 ft_monitor(t_philo *philo)
 {
 	while (1)
 	{
