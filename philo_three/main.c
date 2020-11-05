@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 18:44:39 by adrian            #+#    #+#             */
-/*   Updated: 2020/11/05 20:26:17 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/05 20:54:37 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static int	init_philos(t_state *state)
 	{
 		state->philo[i].is_eating = 0;
 		state->philo[i].position = i;
-		state->philo[i].eat_count = 0;
 		state->philo[i].state = state;
 		make_semaphore_name(SEMAPHORE_PHILO, (char*)semaphore, i);
 		if ((state->philo[i].mutex = ft_sem_open(semaphore, 1)) < 0)
@@ -76,7 +75,7 @@ int		start_forks(t_state *state)
 		state->philo[i].pid = fork();
 		if (state->philo[i].pid == 0)
 		{
-			ft_body(state);
+			ft_body(&state->philo[i]);
 			exit(0);
 		}		
 		usleep(100);
