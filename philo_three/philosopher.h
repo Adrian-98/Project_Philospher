@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 18:44:49 by adrian            #+#    #+#             */
-/*   Updated: 2020/11/05 20:33:29 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/05 21:06:41 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_state
 	sem_t			*forks_m;
 	sem_t			*write_m;
 	sem_t			*somebody_dead_m;
+	sem_t			*dead_write_m;
 
 }				t_state;
 
