@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 18:44:39 by adrian            #+#    #+#             */
-/*   Updated: 2020/11/04 20:32:20 by adrian           ###   ########.fr       */
+/*   Updated: 2020/11/05 17:14:36 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
-
-
-static int	init_semaphores(t_state *state)
-{
-	if ((state->forks_m = ft_sem_open(SEMAPHORE_FORK, state->amount)) < 0
-		|| (state->write_m = ft_sem_open(SEMAPHORE_WRITE, 1)) < 0
-		|| (state->somebody_dead_m = ft_sem_open(SEMAPHORE_DEAD, 0)) < 0)
-		return (1);
-	return (0);
-}
 
 static int	init_philos(t_state *state)
 {
@@ -44,6 +34,7 @@ static int	init_philos(t_state *state)
 			return (1);
 		i++;
 	}
+	init_semaphores(state);
 	return (0);
 }
 
@@ -74,6 +65,24 @@ static	int		fill_struct(t_state *state, int argc, char **argv)
 	return (1);
 }
 
+int		start_threads(t_state *state)
+{
+	pthread_t	id[state->amount];
+	int i;
+
+	state->start = get_time();
+	// if (state->must_eat_count > 0)
+	// 	ft_eat_counter(state);
+	i = -1;
+	while (++i < state->amount)
+	{
+		state->philo[i].last_eat = get_time();
+		if(pthread_create(&id[i], NULL, (void *)&ft_body, &state->philo[i]) != 0)
+			return (ft_error("Error: creating threads\n"));
+		usleep(100);
+	}
+	return 0;
+}
 
 int main(int argc, char **argv)
 {
@@ -86,6 +95,6 @@ int main(int argc, char **argv)
 	if (fill_struct(state, argc, argv) == 0)
 			return(ft_error("Error : wrong parameters or malloc fail\n"));
 	start_threads(state);
-
+	sem_wait(state->somebody_dead_m);
 	return (0);
 }

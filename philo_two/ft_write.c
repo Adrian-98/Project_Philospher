@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_write.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:51:04 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/04 20:30:50 by adrian           ###   ########.fr       */
+/*   Updated: 2020/11/05 17:27:16 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ static char	*get_message(int type)
 	return (" IS DEAD\n");
 }
 
-int
-	display_message(t_philo *philo, int type)
+int		message(t_philo *philo, int type)
 {
 	static int	done = 0;
 	int			ret;

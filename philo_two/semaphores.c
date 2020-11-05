@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   semaphores.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:22:05 by ncolomer          #+#    #+#             */
-/*   Updated: 2020/11/04 20:29:38 by adrian           ###   ########.fr       */
+/*   Updated: 2020/11/05 17:25:20 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,13 @@ char	*make_semaphore_name(char const *base, char *buffer, int position)
 	}
 	buffer[i] = 0;
 	return (buffer);
+}
+
+int			init_semaphores(t_state *state)
+{
+	if ((state->forks_m = ft_sem_open(SEMAPHORE_FORK, state->amount)) < 0
+		|| (state->write_m = ft_sem_open(SEMAPHORE_WRITE, 1)) < 0
+		|| (state->somebody_dead_m = ft_sem_open(SEMAPHORE_DEAD, 0)) < 0)
+		return (1);
+	return (0);
 }

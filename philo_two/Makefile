@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adrian <adrian@student.42.fr>              +#+  +:+       +#+         #
+#    By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/04 18:42:18 by adrian            #+#    #+#              #
-#    Updated: 2020/11/04 18:42:49 by adrian           ###   ########.fr        #
+#    Updated: 2020/11/05 17:32:07 by amunoz-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= philo_two
 
-SRCS		= main.c extras.c ft_body.c ft_life.c ft_write.c
+SRCS		= main.c extras.c ft_body.c ft_life.c ft_write.c semaphores.c
 
 OBJS		=	$(SRCS:.c=.o)
 

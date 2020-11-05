@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 18:44:49 by adrian            #+#    #+#             */
-/*   Updated: 2020/11/04 20:28:36 by adrian           ###   ########.fr       */
+/*   Updated: 2020/11/05 17:31:38 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,15 @@ int						ft_atoi(char const *str);
 void					ft_putnbr_fd(uint64_t n, int fd);
 uint64_t				get_time(void);
 int						ft_error(char *str);
+int						message(t_philo *philo, int type);
+int						init_semaphores(t_state *state);
+void					*ft_body(void *philo_v);
+void					ft_monitor(t_philo *philo);
+int						ft_counter(t_state *state);
+void					ft_eat_counter(t_state *state);
+char					*make_semaphore_name(char const *base, char *buffer, int position);
+sem_t					*ft_sem_open(char const *name, int value);
+
 
 
 #endif
