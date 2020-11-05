@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 18:44:39 by adrian            #+#    #+#             */
-/*   Updated: 2020/11/05 17:14:36 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/05 18:13:40 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static int	init_philos(t_state *state)
 	{
 		state->philo[i].is_eating = 0;
 		state->philo[i].position = i;
-		state->philo[i].lfork = i;
-		state->philo[i].rfork = (i + 1) % state->amount;
 		state->philo[i].eat_count = 0;
 		state->philo[i].state = state;
 		make_semaphore_name(SEMAPHORE_PHILO, (char*)semaphore, i);
@@ -71,8 +69,9 @@ int		start_threads(t_state *state)
 	int i;
 
 	state->start = get_time();
-	// if (state->must_eat_count > 0)
-	// 	ft_eat_counter(state);
+		
+	if (state->must_eat_count > 0)
+	 	ft_eat_counter(state);
 	i = -1;
 	while (++i < state->amount)
 	{
@@ -95,6 +94,7 @@ int main(int argc, char **argv)
 	if (fill_struct(state, argc, argv) == 0)
 			return(ft_error("Error : wrong parameters or malloc fail\n"));
 	start_threads(state);
+
 	sem_wait(state->somebody_dead_m);
 	return (0);
 }

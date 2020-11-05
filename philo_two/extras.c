@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 19:42:42 by amunoz-p          #+#    #+#             */
-/*   Updated: 2020/11/05 17:32:33 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/05 18:17:09 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ int			ft_error(char *str)
 	return (1);
 }
 
-int
-	ft_strcpy(char *dst, const char *src)
+int			ft_strcpy(char *dst, const char *src)
 {
 	int	i;
 

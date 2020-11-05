@@ -6,7 +6,7 @@
 /*   By: amunoz-p <amunoz-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 18:44:49 by adrian            #+#    #+#             */
-/*   Updated: 2020/11/05 17:31:38 by amunoz-p         ###   ########.fr       */
+/*   Updated: 2020/11/05 18:17:18 by amunoz-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_philo
 	int				rfork;
 	int				eat_count;
 	struct s_state	*state;
-	sem_t			mutex;
+	sem_t			*mutex;
 	sem_t			*eat_count_m;
 }				t_philo;
 
@@ -61,8 +61,8 @@ typedef struct s_state
 
 	struct s_philo	*philo;
 	sem_t			*forks_m;
-	sem_t			write_m;
-	sem_t			somebody_dead_m;
+	sem_t			*write_m;
+	sem_t			*somebody_dead_m;
 
 }				t_state;
 
@@ -81,6 +81,7 @@ int						ft_counter(t_state *state);
 void					ft_eat_counter(t_state *state);
 char					*make_semaphore_name(char const *base, char *buffer, int position);
 sem_t					*ft_sem_open(char const *name, int value);
+int						ft_strcpy(char *dst, const char *src);
 
 
 
